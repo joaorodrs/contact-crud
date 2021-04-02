@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { identity } from 'rxjs';
 import { Contact } from '../contact.entity';
 import { ContactsService } from './contacts.service';
@@ -25,5 +33,10 @@ export class ContactsController {
     contactData.id = Number(id);
     console.log('Update # ', contactData.id);
     return this.contactsService.update(contactData);
+  }
+
+  @Delete(':id/delete')
+  async delete(@Param('id') id: number): Promise<any> {
+    return this.contactsService.delete(id);
   }
 }
